@@ -12,8 +12,8 @@ const SignIn: React.FC = () => {
       <Image source={logoImg} />
       <Title> Entre na sua conta </Title>
 
-      <Input />
-      <Input />
+      <Input name="email" icon="mail" placeholder="E-mail" />
+      <Input name="email" icon="lock" placeholder="Senha" />
 
       <Button
         onPress={() => {
