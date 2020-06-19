@@ -70,6 +70,7 @@ const SignIn: React.FC = () => {
                 placeholder="Senha"
                 secureTextEntry
                 returnKeyType="send"
+                textContentType="newPassword"
                 onSubmitEditing={() => {
                   submitForm();
                 }}
