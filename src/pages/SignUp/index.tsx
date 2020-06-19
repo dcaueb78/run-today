@@ -7,6 +7,7 @@ import {
   Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 import { Input, Button } from '../../components/FormInputs';
 
 import logoImg from '../../assets/logo.png';
@@ -19,6 +20,8 @@ import {
 } from './styles';
 
 const SignUp: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <>
       <KeyboardAvoidingView
@@ -49,7 +52,11 @@ const SignUp: React.FC = () => {
           </Container>
         </ScrollView>
 
-        <BackToSignInButton onPress={() => {}}>
+        <BackToSignInButton
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
           <Icon name="arrow-left" size={20} color="#cccccc" />
           <BackToSignInText> Entre na sua conta </BackToSignInText>
         </BackToSignInButton>
