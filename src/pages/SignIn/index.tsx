@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import {
   Image,
   View,
@@ -7,17 +7,20 @@ import {
   Platform,
   TextInput,
   Alert,
+  Text,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
-import { FormHandles, useField } from '@unform/core';
+import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+import LottieView from 'lottie-react-native';
 
 import { getValidationErrors } from '../../utils/getValidationErrors';
 import { Input, Button } from '../../components/FormInputs';
 
 import logoImg from '../../assets/logo.png';
+import loadingAnimation from '../../assets/loading_animation.json';
 
 import {
   Container,
@@ -37,9 +40,9 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSignIn = useCallback(async (data: SignInFormData) => {
-    console.log(data);
     try {
       formRef.current?.setErrors({});
 
@@ -80,6 +83,17 @@ const SignIn: React.FC = () => {
           contentContainerStyle={{ flex: 1 }}
         >
           <Container>
+            {isLoading && (
+              <LottieView
+                source={loadingAnimation}
+                autoPlay
+                resizeMode="contain"
+                style={{
+                  backgroundColor: 'rgba(49,46,56, 0.5)',
+                  zIndex: 2,
+                }}
+              />
+            )}
             <Image source={logoImg} />
             <View>
               <Title> Entre na sua conta </Title>
