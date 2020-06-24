@@ -39,10 +39,11 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSignIn = useCallback(async (data: SignInFormData) => {
     try {
+      setIsLoading(true);
       formRef.current?.setErrors({});
 
       const schema = Yup.object().shape({
@@ -51,7 +52,9 @@ const SignIn: React.FC = () => {
           .email('Digite um e-mail válido'),
         password: Yup.string().min(6, 'No mínimo 6 dígitos'),
       });
-
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
       return await schema.validate(data, {
         abortEarly: false,
       });
@@ -61,6 +64,8 @@ const SignIn: React.FC = () => {
 
         return formRef.current?.setErrors(errors);
       }
+
+      setIsLoading(false);
       return Alert.alert(
         'Erro na autenticação',
         'Ocorreu um erro ao fazer login, verifique seus dados',
