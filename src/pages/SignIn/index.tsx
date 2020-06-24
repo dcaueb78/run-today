@@ -7,20 +7,19 @@ import {
   Platform,
   TextInput,
   Alert,
-  Text,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import LottieView from 'lottie-react-native';
 
 import { getValidationErrors } from '../../utils/getValidationErrors';
 import { Input, Button } from '../../components/FormInputs';
 
 import logoImg from '../../assets/logo.png';
-import loadingAnimation from '../../assets/loading_animation.json';
+
+import { Loading } from '../../libs/Lottie/Loading';
 
 import {
   Container,
@@ -83,17 +82,7 @@ const SignIn: React.FC = () => {
           contentContainerStyle={{ flex: 1 }}
         >
           <Container>
-            {isLoading && (
-              <LottieView
-                source={loadingAnimation}
-                autoPlay
-                resizeMode="contain"
-                style={{
-                  backgroundColor: 'rgba(49,46,56, 0.5)',
-                  zIndex: 2,
-                }}
-              />
-            )}
+            {isLoading && <Loading />}
             <Image source={logoImg} />
             <View>
               <Title> Entre na sua conta </Title>
