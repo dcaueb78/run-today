@@ -52,12 +52,13 @@ const SignIn: React.FC = () => {
           .email('Digite um e-mail válido'),
         password: Yup.string().min(6, 'No mínimo 6 dígitos'),
       });
-      setTimeout(() => {
+      return setTimeout(async () => {
         setIsLoading(false);
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+        navigation.navigate('Map');
       }, 1000);
-      return await schema.validate(data, {
-        abortEarly: false,
-      });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
